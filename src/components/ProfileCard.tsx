@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { Check, Plus, Music2 } from "lucide-react";
+import { FaInstagram , FaYoutube} from "react-icons/fa";
 import type { Platform, UserProfileSummary } from "@/types";
 import { VerifiedBadge } from "./VerifiedBadge";
 import { useSelectedStore } from "@/store/useSelectedStore";
@@ -11,10 +13,16 @@ interface ProfileCardProps {
 }
 
 function formatFollowersLocal(count: number) {
-  if (count >= 1000000) return (count / 1000000).toFixed(1) + "M followers";
-  if (count >= 1000) return (count / 1000).toFixed(0) + "K followers";
-  return count + " followers";
+  if (count >= 1000000) return (count / 1000000).toFixed(1) + "M";
+  if (count >= 1000) return (count / 1000).toFixed(0) + "K";
+  return count.toString();
 }
+
+const platformIcons = {
+  instagram: <FaInstagram size={16} />,
+  youtube: <FaYoutube size={16} />,
+  tiktok: <Music2 size={16} />,
+};
 
 export function ProfileCard({
   profile,
@@ -30,47 +38,100 @@ export function ProfileCard({
   const added = isSelected(profile.username);
 
   const handleClick = () => {
-    if (onProfileClick) onProfileClick(profile.username);
+    onProfileClick?.(profile.username);
     navigate(`/profile/${profile.username}?platform=${platform}`);
   };
 
   const handleAddToList = (
-    e: React.MouseEvent<HTMLButtonElement>) => {
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.stopPropagation();
 
-    if (!added){
+    if (!added) {
       addProfile(profile);
     }
   };
 
   return (
     <div
-      onClick={handleClick}
-      className="flex items-center gap-3 p-3 border border-gray-300 mb-2 cursor-pointer hover:bg-gray-50 w-[700px]"
       data-search={searchQuery}
+      onClick={handleClick}
+      className="group relative overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
     >
-      <img src={profile.picture} className="w-12 h-12 rounded-full" />
-      <div className="text-left flex-1">
-        <div className="font-bold">
-          @{profile.username}
-          <VerifiedBadge verified={profile.is_verified} />
+      {/* Gradient Background */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-cyan-500/10" />
+
+      <div className="relative p-6">
+
+        {/* Platform Badge */}
+        <div className="flex justify-between items-center mb-5">
+
+          <span className="flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 capitalize">
+            {platformIcons[platform]}
+            {platform}
+          </span>
+
+          {profile.is_verified && (
+            <VerifiedBadge verified />
+          )}
+
         </div>
-        <div className="text-sm text-gray-600">{profile.fullname}</div>
-        <div className="text-sm">{formatFollowersLocal(profile.followers)}</div>
+
+        {/* Avatar */}
+        <div className="flex justify-center mb-5">
+          <img
+            src={profile.picture}
+            alt={profile.fullname}
+            className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+        </div>
+
+        {/* User Info */}
+        <div className="text-center">
+
+          <h2 className="text-xl font-bold text-gray-900">
+            {profile.fullname}
+          </h2>
+
+          <p className="text-gray-500">
+            @{profile.username}
+          </p>
+
+          <div className="mt-4">
+            <p className="text-3xl font-bold text-purple-600">
+              {formatFollowersLocal(profile.followers)}
+            </p>
+
+            <p className="text-sm text-gray-500">
+              Followers
+            </p>
+          </div>
+
+        </div>
+
+        {/* Button */}
+        <button
+          onClick={handleAddToList}
+          disabled={added}
+          className={`mt-6 w-full rounded-xl py-3 font-semibold transition flex items-center justify-center gap-2 ${
+            added
+              ? "bg-green-100 text-green-700"
+              : "bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg"
+          }`}
+        >
+          {added ? (
+            <>
+              <Check size={18} />
+              Added
+            </>
+          ) : (
+            <>
+              <Plus size={18} />
+              Add to List
+            </>
+          )}
+        </button>
       </div>
-      {/* TODO: candidates must implement Add to List feature */}
-      {/* TODO: candidates must implement Add to List feature */}
-      <button
-        onClick={handleAddToList}
-        disabled= {added}
-        className={`px-4 py-2 rounded-md text-sm font-medium transition ${
-        added
-          ? "bg-green-100 text-green-700 cursor-not-allowed"
-          : "bg-blue-600 text-white hover:bg-blue-700"
-      }`}
-      >
-        {added ? "Added ✓" : "Add to List"}
-      </button>
     </div>
   );
 }

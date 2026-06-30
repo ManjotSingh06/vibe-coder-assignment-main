@@ -25,7 +25,11 @@ export function SearchPage() {
   );
 
   return (
-    <Layout title="Find Influencers">
+    <Layout>
+      
+      <div className="mb-8">
+        <h1 className="text-5xl font-extrabold">Discover Influencers</h1>
+      </div>
       <div className="max-w-7xl mx-auto flex gap-6">
         {/* Main Content */}
         <div className="flex-1 max-w-4xl mx-auto">
@@ -70,7 +74,7 @@ export function SearchPage() {
 
         {/* Sidebar */}
         {selectedProfiles.length > 0 && (
-          <div className="hidden lg:block w-80 shrink-0">
+          <div className="hidden lg:block w-80 shrink-0 sticky top-8 h-screen bg">
             <SelectedSidebar />
           </div>
         )}

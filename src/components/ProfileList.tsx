@@ -15,17 +15,16 @@ export function ProfileList({
   onProfileClick,
 }: ProfileListProps) {
   return (
-    <div className="flex flex-col items-center">
-      {profiles.length === 0 && <p>No profiles found</p>}
-      {profiles.map((profile) => (
-        <ProfileCard
-          key={profile.user_id}
-          profile={profile}
-          platform={platform}
-          searchQuery={searchQuery}
-          onProfileClick={onProfileClick}
-        />
-      ))}
-    </div>
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {profiles.map((profile) => (
+      <ProfileCard
+        key={profile.user_id}
+        profile={profile}
+        platform={platform}
+        searchQuery={searchQuery}
+        onProfileClick={onProfileClick}
+      />
+    ))}
+  </div>
   );
 }
