@@ -12,6 +12,8 @@ export interface UserProfileSummary {
   engagement_rate?: number;
   handle?: string;
   avg_views?: number;
+  custom_name?: string;
+  description?: string;
 }
 
 export interface SearchAccount {
@@ -34,6 +36,10 @@ export interface FullUserProfile extends UserProfileSummary {
   avg_likes?: number;
   avg_comments?: number;
   avg_reels_plays?: number;
+  avg_views?: number;
+  engagements?: number;
+  handle?: string;
+  custom_name?: string;
   gender?: string;
   age_group?: string;
 }
