@@ -38,7 +38,7 @@ export function ProfileDetailPage() {
   const [loaded, setLoaded] = useState(false);
 
   const addProfile = useSelectedStore((state) => state.addProfile);
-  const isSelected = useSelectedStore((state) => state.isSelected);
+  const selectedProfiles = useSelectedStore((state) => state.selectedProfiles);
 
   useEffect(() => {
     if (!username) return;
@@ -106,8 +106,9 @@ export function ProfileDetailPage() {
 
   const user: FullUserProfile = profileData.data.user_profile;
 
-
-  const added = user ? isSelected(user.username) : false;
+  const added = selectedProfiles.some(
+    (profile) => profile.username === user.username
+  );
 
   const handleAdd = () => {
     if (!added) {

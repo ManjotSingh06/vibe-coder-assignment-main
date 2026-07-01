@@ -33,9 +33,11 @@ export function ProfileCard({
   const navigate = useNavigate();
 
   const addProfile = useSelectedStore((state) => state.addProfile);
-  const isSelected = useSelectedStore((state) => state.isSelected);
+  const selectedProfiles = useSelectedStore((state) => state.selectedProfiles);
 
-  const added = isSelected(profile.username);
+  const added = selectedProfiles.some(
+    (selectedProfile) => selectedProfile.username === profile.username
+  );
 
   const handleClick = () => {
     onProfileClick?.(profile.username);

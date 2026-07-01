@@ -290,7 +290,7 @@ export default function CompareTable({
 
                 <button
                   onClick={() =>
-                    removeProfile(profile.user_id)
+                    removeProfile(profile.username)
                   }
                   className="rounded-lg bg-red-100 p-2 transition hover:bg-red-200"
                 >
