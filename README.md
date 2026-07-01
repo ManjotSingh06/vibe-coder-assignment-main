@@ -5,6 +5,25 @@ A modern Influencer Discovery Platform built using **React 19**, **TypeScript**,
 The application allows users to browse influencers from **Instagram**, **YouTube**, and **TikTok**, search creators, view detailed analytics, create a comparison list, and compare influencers side-by-side.
 
 ---
+## Table of Contents
+
+- Live Demo
+- Screenshots
+- Tech Stack
+- Features
+- Project Structure
+- Library Added
+- Assumptions
+- Trade-offs
+- State Management
+- Data Flow
+- Improvements Made
+- Challenges
+- Approach
+- Future Improvements
+- Testing
+- Installation
+- Deployment
 
 # Live Demo
 
@@ -17,10 +36,10 @@ The application allows users to browse influencers from **Instagram**, **YouTube
 ## Home Page
 
 <p align="center">
-  <img src="src\assets\screenshot\home.png" width="900">
+  <img src="src/assets/screenshot/home.png" width="900">
 </p>
 <p align="center">
-  <img src="src\assets\screenshot\home-1.png" width="900">
+  <img src="src/assets/screenshot/home-1.png" width="900">
 </p>
 ---
 
@@ -46,7 +65,7 @@ The application allows users to browse influencers from **Instagram**, **YouTube
   <img src="src/assets/screenshot/mobile home.png" width="300">
 </p>
 <p align="center">
-  <img src="src\assets\screenshot/mobile compare.png" width="900">
+  <img src="src/assets/screenshot/mobile compare.png" width="900">
 </p>
 
 ---
@@ -117,6 +136,32 @@ src
 ```
 
 ---
+# Libraries Added
+
+| Library | Purpose |
+|----------|----------|
+| Zustand | Global state management |
+| React Router DOM | Routing |
+| Lucide React | Icons |
+| Tailwind CSS | Styling |
+
+## Removed:
+ react-beautiful-dnd
+
+# Assumptions
+
+- Search JSON acts as the primary data source.
+- Detailed profile JSON files may not exist for every creator.
+- When detailed profile data is unavailable, the application falls back to summary search data.
+- Comparison state is stored locally using Zustand.
+- Analytics displayed are based only on the provided dataset.
+
+# Trade-offs
+
+- Local JSON files were used instead of an API.
+- Comparison data is not persisted after refresh.
+- Some creators have limited analytics due to incomplete datasets.
+- Charts are currently placeholders because historical metrics were unavailable.
 
 # Features
 
@@ -511,6 +556,23 @@ The implementation followed these principles:
 - Performance optimization using React Query
 
 ---
+# Testing
+
+The application was manually tested for:
+
+- Search functionality
+- Platform switching
+- Profile detail loading
+- Add/Remove compare list
+- Responsive layout
+- Invalid profile fallback
+- Navigation
+
+# Performance Considerations
+
+- Lazy loaded profile JSON files using import.meta.glob().
+- Zustand prevents unnecessary prop drilling.
+- Search filters are computed in-memory for the current dataset.
 
 # Installation
 
