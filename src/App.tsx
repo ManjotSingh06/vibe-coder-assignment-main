@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SearchPage } from "@/pages/SearchPage";
-import { ProfileDetailPage } from "@/pages/ProfileDetailPage";
-import ComparePage from "@/pages/ComparePage";
+import { SearchPage } from "@/features/search/pages/SearchPage";
+import { ProfileDetailPage } from "@/features/profile/pages/ProfileDetailPage";
+import ComparePage from "@/features/compare/pages/ComparePage";
 
 function App() {
   return (

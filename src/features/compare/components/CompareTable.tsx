@@ -1,5 +1,5 @@
 import { Trash2, Trophy } from "lucide-react";
-import { VerifiedBadge } from "@/components/VerifiedBadge";
+import { VerifiedBadge } from "@/features/profile/components/VerifiedBadge";
 import { useSelectedStore } from "@/store/useSelectedStore";
 import type { UserProfileSummary } from "@/types";
 

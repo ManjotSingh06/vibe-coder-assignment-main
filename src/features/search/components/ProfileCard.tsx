@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Check, Plus, Music2 } from "lucide-react";
 import { FaInstagram , FaYoutube} from "react-icons/fa";
 import type { Platform, UserProfileSummary } from "@/types";
-import { VerifiedBadge } from "./VerifiedBadge";
+import { VerifiedBadge } from "@/features/profile/components/VerifiedBadge";
 import { useSelectedStore } from "@/store/useSelectedStore";
 
 interface ProfileCardProps {
