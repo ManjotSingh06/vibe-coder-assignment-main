@@ -45,6 +45,9 @@ The application allows users to browse influencers from **Instagram**, **YouTube
 <p align="center">
   <img src="src/assets/screenshot/mobile home.png" width="300">
 </p>
+<p align="center">
+  <img src="src\assets\screenshot/mobile compare.png" width="900">
+</p>
 
 ---
 
