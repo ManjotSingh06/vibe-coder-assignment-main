@@ -4,7 +4,7 @@ import { Layout } from "@/components/Layout";
 import { PlatformFilter } from "@/components/PlatformFilter";
 import { ProfileList } from "@/components/ProfileList";
 import { extractProfiles, filterProfiles } from "@/utils/dataHelpers";
-import SelectedSidebar from "@/components/selectedSideBar";
+import SelectedSidebar from "@/components/SelectedSideBar";
 import { useSelectedStore } from "@/store/useSelectedStore";
 
 export function SearchPage() {
