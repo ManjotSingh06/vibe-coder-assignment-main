@@ -292,12 +292,28 @@ setClickCount(clickCount + 1);
 console.log(clickCount);
 ```
 
-This logged stale values because React state updates are asynchronous.
+This logged stale values because the SearchPage component was remounted whenever the user navigated back from the profile detail page, the click counter was recreated on every mount.
 
 Updated using
 
-```ts
-setClickCount(prev => prev + 1);
+The click tracking was moved to the global Zustand store.
+
+Implemented:
+
+Persistent click tracking
+Individual click count for every profile
+Helper functions for incrementing, retrieving and resetting counts
+```
+profileClicks: Record<string, number>
+
+incrementProfileClick(username)
+
+getProfileClickCount(username)
+
+resetProfileClick(username)
+
+resetAllProfileClicks()
+
 ```
 
 ---

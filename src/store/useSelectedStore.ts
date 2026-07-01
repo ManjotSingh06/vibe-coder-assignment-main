@@ -2,18 +2,19 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { UserProfileSummary } from "../types";
 
-
-
 interface SelectedStore {
   selectedProfiles: UserProfileSummary[];
 
   addProfile: (profile: UserProfileSummary) => void;
-
   removeProfile: (username: string) => void;
-
   clearProfiles: () => void;
-
   isSelected: (username: string) => boolean;
+
+  // Click counter
+  profileClicks: Record<string, number>;
+  incrementProfileClick: (username: string) => void;
+  getProfileClickCount: (username: string) => number;
+  clearProfileClicks: () => void;
 }
 
 export const useSelectedStore = create<SelectedStore>()(
@@ -52,6 +53,27 @@ export const useSelectedStore = create<SelectedStore>()(
           (profile) => profile.username === username
         );
       },
+
+      // -------------------------
+      // Click Counter
+      // -------------------------
+
+      profileClicks: {},
+
+      incrementProfileClick: (username) =>
+        set((state) => ({
+          profileClicks: {
+            ...state.profileClicks,
+            [username]: (state.profileClicks[username] || 0) + 1,
+          },
+        })),
+      getProfileClickCount: (username) => get().profileClicks[username] ?? 0,
+
+      clearProfileClicks: () => {
+        set({
+          profileClicks: {},
+        });
+      }
     }),
     {
       name: "selected-profiles",

@@ -8,17 +8,32 @@ import SelectedSidebar from "@/features/search/components/SelectedSideBar";
 import { useSelectedStore } from "@/store/useSelectedStore";
 
 export function SearchPage() {
+  
   const [platform, setPlatform] = useState<Platform>("instagram");
   const [searchQuery, setSearchQuery] = useState("");
-  const [clickCount, setClickCount] = useState(0);
 
   const allProfiles = extractProfiles(platform);
   const filtered = filterProfiles(allProfiles, searchQuery);
 
+  const incrementProfileClick = useSelectedStore(
+    (state) => state.incrementProfileClick
+  );
+
+  const getProfileClickCount = useSelectedStore(
+    (state) => state.getProfileClickCount
+  );
+
   const handleProfileClick = (username: string) => {
-    setClickCount((prev) => prev + 1);
-    console.log("Clicked profile:", username, "total clicks:", clickCount);
+    incrementProfileClick(username);
+
+
+    console.log(
+      `$ ${username} clicked! Total Clicks: ${getProfileClickCount(username) + 1}`
+    );
   };
+
+    
+
 
   const selectedProfiles = useSelectedStore(
     (state) => state.selectedProfiles
