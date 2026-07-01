@@ -95,7 +95,7 @@ export function ProfileDetailPage() {
 
           <Link
             to="/"
-            className="mt-6 inline-flex rounded-xl bg-indigo-600 text-white px-5 py-3"
+            className="mt-6 inline-flex rounded-xl bg-indigo-600 text-white px-5 py-3 hover:bg-indigo-700"
           >
             Back
           </Link>
@@ -106,9 +106,15 @@ export function ProfileDetailPage() {
 
   const user: FullUserProfile = profileData.data.user_profile;
 
-  const added = isSelected(user.username || user.handle || "");
 
-  
+  const added = user ? isSelected(user.username) : false;
+
+  const handleAdd = () => {
+    if (!added) {
+      addProfile(user);
+    }
+  };
+
   const badgeClass =
     platform === "instagram"
       ? "bg-pink-100 text-pink-600"
@@ -122,7 +128,7 @@ export function ProfileDetailPage() {
 
         <div className="max-w-6xl mx-auto">
 
-          <Link to="/" className=" fixed  top-10  left-15   z-50    flex    items-center    gap-2     px-5    py-3    rounded-xl    bg-white/90    backdrop-blur-md    shadow-lg    border    border-gray-200    text-gray-700    hover:bg-white    hover:shadow-xl    hover:-translate-y-0.5    transition-all duration-300
+          <Link to="/" className=" fixed  top-17  left-2   z-50    flex    items-center    gap-2     px-5    py-3    rounded-xl    bg-white/90    backdrop-blur-md    shadow-lg    border    border-gray-200    text-gray-700    hover:bg-white    hover:shadow-xl    hover:-translate-y-0.5    transition-all duration-300
   "  >
   ←
     </Link>
@@ -177,11 +183,7 @@ export function ProfileDetailPage() {
                     </a>
 
                     <button
-                      onClick={() => {
-                        if (!added) {
-                          addProfile(user);
-                        }
-                      }}
+                      onClick={handleAdd}
                       disabled={added}
                       className={`px-6 py-3 rounded-xl font-semibold transition ${
                         added

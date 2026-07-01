@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+
+import Navbar from "./navBar";
 
 interface LayoutProps {
   children: ReactNode;
@@ -7,13 +8,14 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="p-4 bg-purple-100  w-full min-h-screen  rounded-3xl">
-      <header className="mb-6  pb-4">
-        <Link to="/" className="text-xl font-semibold text-gray-900">
-          Influencer Search
-        </Link>
-      </header>
-      <main>{children}</main>
+    <div className="min-h-screen w-screen bg-gradient-to-br from-violet-100 via-purple-50 to-pink-100">
+
+      <Navbar />
+
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        {children}
+      </main>
+
     </div>
   );
 }

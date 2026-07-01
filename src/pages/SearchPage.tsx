@@ -27,15 +27,23 @@ export function SearchPage() {
   return (
     <Layout>
       
-      <div className="mb-8">
-        <h1 className="text-5xl font-extrabold">Discover Influencers</h1>
+      <div className="flex flex-col items-center justify-center text-center py-6 space-y-2 ">
+        <h1 className="text-6xl font-black">
+            Discover the World's
+            <span className="text-purple-600">
+                Top Influencers
+            </span>
+        </h1>
+
+        <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+            Search creators across Instagram, YouTube and TikTok.
+            Compare engagement, audience size and performance.
+        </p>
+
       </div>
-      <div className="max-w-7xl mx-auto flex gap-6">
+      <div className="max-w-7xl mx-auto flex gap-2">
         {/* Main Content */}
         <div className="flex-1 max-w-4xl mx-auto">
-          <p className="text-gray-500 mb-6">
-            Browse top creators across social platforms
-          </p>
 
           <PlatformFilter
             selected={platform}
@@ -74,7 +82,7 @@ export function SearchPage() {
 
         {/* Sidebar */}
         {selectedProfiles.length > 0 && (
-          <div className="hidden lg:block w-80 shrink-0 sticky top-8 h-screen bg">
+          <div className="hidden lg:block w-80 shrink-0 sticky top-24 h-screen bg">
             <SelectedSidebar />
           </div>
         )}
